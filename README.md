@@ -12,14 +12,14 @@ This project demonstrates how to send and receive _cross-chain messages_ using t
 
 - [Foundry installed](https://book.getfoundry.sh/getting-started/installation)
 - [Node.js and npm installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- You will need testnet tokens in both chains ([Fuji](https://faucets.chain.link/fuji) / [Alfajores](https://faucets.chain.link/celo-alfajores-testnet)) to complete transactions
+- You will need TestNet tokens in both chains ([Fuji](https://faucets.chain.link/fuji) / [Alfajores](https://faucets.chain.link/celo-alfajores-testnet)) to complete transactions
 - An `.env` file with your private key:
 
 ```bash
 PRIVATE_KEY=0x...
 ```
 
-- The `chains.json` file requires the details of the source and target chains. For a complete list of contract addresses needed to populate this file, visit the [contract addresses page](https://wormhole.com/docs/build/reference/) from the Wormhole Documentation
+> The `chains.json` file requires the details of the source and target chains. For a complete list of contract addresses needed to populate this file, visit the [contract addresses page](https://wormhole.com/docs/build/reference/) from the Wormhole Documentation. In this project, we are using Avalanche and Celo as default.
 
 ### Quickstart
 
@@ -83,7 +83,7 @@ npm run deploy:receiver
 Send a message from Avalanche Fuji to Celo Alfajores:
 
 ```bash
-npm run send-message
+npm run send:message
 ```
 - You may check the transaction status on the [Wormhole Explorer](https://wormholescan.io/#/?network=TESTNET)
 
@@ -104,3 +104,5 @@ The deployment scripts automatically store the contract addresses in `deployedCo
 - **lib/** - external dependencies (auto-managed by Foundry)
 - **test/** - unit tests for smart contracts
 
+### Resources
+The [Wormhole documentation tutorial](https://wormhole.com/docs/tutorials/messaging/cross-chain-contracts/) provides a detailed, step-by-step guide for setting up and running this repository.
