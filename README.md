@@ -26,7 +26,7 @@ PRIVATE_KEY=0x...
 **1. Clone the repository:**
 
 ```bash
-git clone 
+git clone https://github.com/wormhole-foundation/demo-wormhole-messaging.git
 ```
 
 **2. Install dependencies:**
