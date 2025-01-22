@@ -1,9 +1,9 @@
-[submodule "typescript/lib/forge-std"]
-	path = typescript/lib/forge-std
+[submodule "lib/forge-std"]
+	path = lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
-[submodule "typescript/lib/openzeppelin-contracts"]
-	path = typescript/lib/openzeppelin-contracts
+[submodule "lib/openzeppelin-contracts"]
+	path = lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
-[submodule "typescript/lib/wormhole-solidity-sdk"]
-	path = typescript/lib/wormhole-solidity-sdk
+[submodule "lib/wormhole-solidity-sdk"]
+	path = lib/wormhole-solidity-sdk
 	url = https://github.com/wormhole-foundation/wormhole-solidity-sdk
