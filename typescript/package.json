@@ -1,0 +1,26 @@
+{
+	"name": "demo-wormhole-messaging-ts",
+	"version": "1.0.0",
+	"description": "**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**",
+	"main": "index.js",
+	"directories": {
+		"lib": "lib",
+		"test": "test"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"deploy:sender": "npx ts-node script/deploySender.ts",
+		"deploy:receiver": "npx ts-node script/deployReceiver.ts",
+		"send:message": "npx ts-node script/sendMessage.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node": "^22.10.6",
+		"dotenv": "^16.4.7",
+		"ethers": "^6.13.5",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.7.3"
+	}
+}

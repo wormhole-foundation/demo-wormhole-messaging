@@ -1,0 +1,9 @@
+[submodule "javascript/lib/forge-std"]
+	path = javascript/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "javascript/lib/wormhole-solidity-sdk"]
+	path = javascript/lib/wormhole-solidity-sdk
+	url = https://github.com/wormhole-foundation/wormhole-solidity-sdk
+[submodule "javascript/lib/openzeppelin-contracts"]
+	path = javascript/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts

@@ -1,0 +1,10 @@
+{
+  "avalanche": {
+    "MessageSender": "0xA43EE2004b56d190A300854D6dfF2b81691Ad1C5",
+    "deployedAt": "2025-01-14T17:27:06.484Z"
+  },
+  "celo": {
+    "MessageReceiver": "0x4BDA7363cbaED6F516162f4B7fE8A8A0689B55b5",
+    "deployedAt": "2025-01-14T17:27:33.260Z"
+  }
+}
