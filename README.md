@@ -25,26 +25,43 @@ PRIVATE_KEY=0x...
 
 ### Quickstart
 
+This repository provides implementations in JavaScript and TypeScript, allowing you to choose the language that best fits your needs.
+
+Select your preferred option:
+
+- JavaScript: Follow the instructions in the `javascript/` directory
+- TypeScript: Follow the instructions in the `typescript/` directory
+
+Both implementations share the same functionality, and you can explore either or both depending on your requirements.
+
 **1. Clone the repository:**
 
 ```bash
 git clone https://github.com/wormhole-foundation/demo-wormhole-messaging.git
 ```
 
-**2. Install dependencies:**
+**2. Navigate to your preferred implementation directory:**
+
+```bash
+cd javascript
+# or
+cd typescript
+```
+
+**3. Install dependencies:**
 
 ```bash
 npm install
 forge install
 ```
 
-**3. Compile contracts:**
+**4. Compile contracts:**
 
 ```bash
 forge build
 ```
 
-**4. Run Tests:**
+**5. Run Tests:**
 
 Before deploying contracts, it's recommended to run the tests to ensure everything is functioning correctly. Run:
 
@@ -64,7 +81,7 @@ Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 7.53ms (3.55ms CPU 
 Ran 1 test suite in 112.75ms (7.53ms CPU time): 3 tests passed, 0 failed, 0 skipped (3 total tests)
 ```
 
-**5. Deploy contracts:**
+**6. Deploy contracts:**
 
 **Deploy the sender contract on Avalanche Fuji:**
 
@@ -80,7 +97,7 @@ npm run deploy:receiver
 ```
 - You may see the respective contract deployed on the [Alfajores Explorer](https://explorer.celo.org/alfajores/)
 
-**6. Send Cross-Chain Message:**
+**7. Send Cross-Chain Message:**
 
 Send a message from Avalanche Fuji to Celo Alfajores:
 
@@ -100,6 +117,8 @@ The deployment scripts automatically store the contract addresses in `deployedCo
 
 ### Project Structure
 
+- **javascript/** - JavaScript implementation
+- **typescript/** - TypeScript implementation
 - **script/** - deployment and interaction scripts
 - **deploy-config/** - chain configuration and deployed contract addresses
 - **out/** - compiled contract artifacts
@@ -107,4 +126,4 @@ The deployment scripts automatically store the contract addresses in `deployedCo
 - **test/** - unit tests for smart contracts
 
 ### Resources
-The [Wormhole documentation tutorial](https://wormhole.com/docs/tutorials/messaging/cross-chain-contracts/) provides a detailed, step-by-step guide for setting up and running this repository.
+The [Wormhole documentation tutorial](https://wormhole.com/docs/tutorials/by-product/contract-integrations/cross-chain-contracts/) provides a detailed, step-by-step guide for setting up and running this repository.
