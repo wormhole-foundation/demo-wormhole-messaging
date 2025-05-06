@@ -1,60 +1,73 @@
 import { ethers } from 'ethers';
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
-import dotenv from 'dotenv';
+import readline from 'readline/promises';
+import { stdin as input, stdout as output } from 'process';
 import { ChainsConfig, DeployedContracts, MessageSenderJson } from './interfaces';
 
-dotenv.config();
-
 async function main(): Promise<void> {
-	// Load the chain configuration from JSON
-	const chains: ChainsConfig = JSON.parse(
-		fs.readFileSync(path.resolve(__dirname, '../deploy-config/chains.json'), 'utf8')
-	);
+  // Load chain configuration
+  const chains: ChainsConfig = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, '../deploy-config/chains.json'), 'utf8')
+  );
 
-	// Get the Avalanche Fuji configuration
-	const avalancheChain = chains.chains.find((chain) =>
-		chain.description.includes('Avalanche testnet')
-	);
-	if (!avalancheChain) {
-		throw new Error('Avalanche testnet configuration not found in chains.json.');
-	}
+  // Find Avalanche Fuji testnet config
+  const avalancheChain = chains.chains.find((chain) =>
+    chain.description.includes('Avalanche testnet')
+  );
+  if (!avalancheChain) {
+    throw new Error('Avalanche testnet configuration not found in chains.json.');
+  }
 
-	// Set up the provider and wallet
-	const provider = new ethers.JsonRpcProvider(avalancheChain.rpc);
-	const wallet = new ethers.Wallet(process.env.PRIVATE_KEY || '', provider);
+  // Set up provider
+  const provider = new ethers.JsonRpcProvider(avalancheChain.rpc);
 
-	// Load the ABI and bytecode of the MessageSender contract
-	const messageSenderJson: MessageSenderJson = JSON.parse(
-		fs.readFileSync(path.resolve(__dirname, '../out/MessageSender.sol/MessageSender.json'), 'utf8')
-	);
+  // Load the encrypted keystore
+  const keystorePath = path.join(os.homedir(), '.foundry', 'keystores', 'CELO_AVAX');
+  const keystore = fs.readFileSync(keystorePath, 'utf8');
 
-	const { abi, bytecode } = messageSenderJson;
+  // Prompt user for password
+  const rl = readline.createInterface({ input, output });
+  const password = await rl.question('Enter keystore password: ');
+  rl.close();
 
-	// Create a ContractFactory for MessageSender
-	const MessageSender = new ethers.ContractFactory(abi, bytecode, wallet);
+  if (!password) {
+    throw new Error('No password provided.');
+  }
 
-	// Deploy the contract using the Wormhole Relayer address for Avalanche Fuji
-	const senderContract = await MessageSender.deploy(avalancheChain.wormholeRelayer);
-	await senderContract.waitForDeployment();
+  // Decrypt and connect wallet
+  const wallet = await ethers.Wallet.fromEncryptedJson(keystore, password);
+  const connectedWallet = wallet.connect(provider);
 
-	console.log('MessageSender deployed to:', senderContract.target); // `target` is the address in ethers.js v6
+  // Load ABI and bytecode
+  const messageSenderJson: MessageSenderJson = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, '../out/MessageSender.sol/MessageSender.json'), 'utf8')
+  );
+  const { abi, bytecode } = messageSenderJson;
 
-	// Update the deployedContracts.json file
-	const deployedContractsPath = path.resolve(__dirname, '../deploy-config/deployedContracts.json');
-	const deployedContracts: DeployedContracts = JSON.parse(
-		fs.readFileSync(deployedContractsPath, 'utf8')
-	);
+  // Create contract factory and deploy
+  const MessageSender = new ethers.ContractFactory(abi, bytecode, connectedWallet);
+  const senderContract = await MessageSender.deploy(avalancheChain.wormholeRelayer);
+  await senderContract.waitForDeployment();
 
-	deployedContracts.avalanche = {
-		MessageSender: senderContract.target as any,
-		deployedAt: new Date().toISOString(),
-	};
+  console.log('MessageSender deployed to:', senderContract.target);
 
-	fs.writeFileSync(deployedContractsPath, JSON.stringify(deployedContracts, null, 2));
+  // Update deployedContracts.json
+  const deployedContractsPath = path.resolve(__dirname, '../deploy-config/deployedContracts.json');
+  const deployedContracts: DeployedContracts = JSON.parse(
+    fs.readFileSync(deployedContractsPath, 'utf8')
+  );
+
+  deployedContracts.avalanche = {
+    MessageSender: senderContract.target as any,
+    deployedAt: new Date().toISOString(),
+  };
+
+  fs.writeFileSync(deployedContractsPath, JSON.stringify(deployedContracts, null, 2));
 }
 
 main().catch((error) => {
-	console.error(error);
-	process.exit(1);
+  console.error(error);
+  process.exit(1);
 });
