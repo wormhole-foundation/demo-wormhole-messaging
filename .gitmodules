@@ -1,6 +1,0 @@
-[submodule "typescript/lib/wormhole-solidity-sdk"]
-	path = typescript/lib/wormhole-solidity-sdk
-	url = https://github.com/wormhole-foundation/wormhole-solidity-sdk
-[submodule "typescript/lib/forge-std"]
-	path = typescript/lib/forge-std
-	url = https://github.com/foundry-rs/forge-std
