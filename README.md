@@ -1,38 +1,43 @@
-## Demo Cross-Chain Messaging with Wormhole
+## Demo Multichain Messaging with Wormhole
 
-This project demonstrates how to send and receive _cross-chain messages_ using the **Wormhole** protocol, specifically between Avalanche Fuji and Celo Alfajores TestNets. The repository includes automated scripts for deploying contracts and sending messages across these chains.
+This project demonstrates how to send and receive _multichain messages_ using the **Wormhole** protocol, specifically between Avalanche Fuji and Celo Alfajores TestNets. The repository includes automated scripts for deploying contracts and sending messages across these chains.
 
-For a complete tutorial on performing cross-chain messaging using Wormhole's Typescript SDK from scratch, please take a look at the [Wormhole Cross-Chain Contracts Tutorial](https://wormhole.com/docs/tutorials/messaging/cross-chain-contracts/).
+The [Get Started with Messaging](/docs/products/messaging/get-started/) documentation provides a step by step guide for setting up and running this repository.
 
 ### Features
 
  - Deploy smart contracts on Avalanche Fuji and Celo Alfajores TestNets
  - Automatically manage contract addresses
- - Send a cross-chain message from one chain to another using Wormhole
+ - Send a multichain message from one chain to another using Wormhole
 
 ### Prerequisites
 
 - [Foundry installed](https://book.getfoundry.sh/getting-started/installation)
 - [Node.js and npm installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- You will need TestNet tokens in both chains ([Fuji](https://faucets.chain.link/fuji) / [Alfajores](https://faucets.chain.link/celo-alfajores-testnet)) to complete transactions
-- An `.env` file with your private key:
+- You will need TestNet tokens in both chains ([Fuji](https://core.app/tools/testnet-faucet/?subnet=c&token=c) / [Alfajores](https://faucet.celo.org/alfajores)) to complete transactions
+- [Foundry keystore password](https://book.getfoundry.sh/reference/cast/cast-wallet-import){target=\_blank} 
 
-```bash
-PRIVATE_KEY=0x...
-```
+#### Encrypt Private Key
+
+Foundry supports multiple options for [creating a keystore](https://book.getfoundry.sh/reference/cast/cast-wallet-import){target=\_blank}. This example uses the `--privatekey` option. As long as you have a decryption password to enter when prompted, you can use your preferred options when creating your Foundry keystore.
+
+1. Create a Foundry keystore to encrypt your wallet private key using the following command: 
+
+    ```bash
+    cast wallet import CELO_AVAX --privatekey INSERT_PRIVATE_KEY
+    ```
+
+2. Enter the password you wish to use to decrypt your private key at the prompt. You will not see the password in the terminal as you type:
+
+    ```bash
+    Enter password: INSERT_DECRYPTION_PASSWORD
+    ```
+
+3. Select return to save your password, and you will see a success message confirming that the keystore was saved successfully. Keep this password. You will be prompted to enter it in the terminal when a wallet signature is required
 
 > The `chains.json` file requires the details of the source and target chains. For a complete list of contract addresses needed to populate this file, visit the [contract addresses page](https://wormhole.com/docs/build/reference/) from the Wormhole Documentation. In this project, we are using Avalanche and Celo as default.
 
 ### Quickstart
-
-This repository provides implementations in JavaScript and TypeScript, allowing you to choose the language that best fits your needs.
-
-Select your preferred option:
-
-- JavaScript: Follow the instructions in the `javascript/` directory
-- TypeScript: Follow the instructions in the `typescript/` directory
-
-Both implementations share the same functionality, and you can explore either or both depending on your requirements.
 
 **1. Clone the repository:**
 
@@ -40,12 +45,10 @@ Both implementations share the same functionality, and you can explore either or
 git clone https://github.com/wormhole-foundation/demo-wormhole-messaging.git
 ```
 
-**2. Navigate to your preferred implementation directory:**
+**2. Navigate to your project directory:**
 
 ```bash
-cd javascript
-# or
-cd typescript
+cd demo-wormhole-messaging
 ```
 
 **3. Install Foundry dependencies:**
@@ -124,13 +127,10 @@ The deployment scripts automatically store the contract addresses in `deployedCo
 
 ### Project Structure
 
-- **javascript/** - JavaScript implementation
-- **typescript/** - TypeScript implementation
 - **script/** - deployment and interaction scripts
 - **deploy-config/** - chain configuration and deployed contract addresses
 - **out/** - compiled contract artifacts
 - **lib/** - external dependencies (auto-managed by Foundry)
 - **test/** - unit tests for smart contracts
 
-### Resources
-The [Wormhole documentation tutorial](https://wormhole.com/docs/tutorials/by-product/contract-integrations/cross-chain-contracts/) provides a detailed, step-by-step guide for setting up and running this repository.
+

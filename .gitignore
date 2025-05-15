@@ -1,0 +1,19 @@
+# === Forge / Foundry ===
+cache/
+out/
+lib/**/.git/         # Prevents submodule git metadata from being tracked
+lib/**/.gitmodules   # Prevents nested submodule configs
+
+# Ignore forge broadcast logs (except the folder itself)
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# === Node.js ===
+node_modules/
+.env
+package-lock.json
+
+# === Docs / Misc ===
+docs/
+
