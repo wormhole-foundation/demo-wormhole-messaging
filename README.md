@@ -24,7 +24,7 @@ Foundry supports multiple options for [creating a keystore](https://book.getfoun
 1. Create a Foundry keystore to encrypt your wallet private key using the following command: 
 
     ```bash
-    cast wallet import CELO_AVAX --privatekey INSERT_PRIVATE_KEY
+    cast wallet import CELO_AVAX --private-key INSERT_PRIVATE_KEY
     ```
 
 2. Enter the password you wish to use to decrypt your private key at the prompt. You will not see the password in the terminal as you type:
@@ -51,27 +51,19 @@ git clone https://github.com/wormhole-foundation/demo-wormhole-messaging.git
 cd demo-wormhole-messaging
 ```
 
-**3. Install Foundry dependencies:**
-
-```bash
-forge install wormhole-foundation/wormhole-solidity-sdk
-forge install foundry-rs/forge-std
-```
-
-
-**4. Install dependencies:**
+**3. Install dependencies:**
 
 ```bash
 npm install
 ```
 
-**5. Compile contracts:**
+**4. Compile contracts:**
 
 ```bash
 forge build
 ```
 
-**6. Run Tests:**
+**5. Run Tests:**
 
 Before deploying contracts, it's recommended to run the tests to ensure everything is functioning correctly. Run:
 
